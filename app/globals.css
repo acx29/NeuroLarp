@@ -1,0 +1,214 @@
+/***
+ * app/globals.css
+ * Theme tokens (light + .nl-dark), base styles, keyframes, hover utilities, editor typography
+ ***/
+@import "tailwindcss";
+
+/* ===== NeuroLarp theme tokens — verbatim from design handoff ===== */
+html {
+  --bg: #ffffff;
+  --sf: #fff;
+  --sf2: #fafafa;
+  --sf3: #f4f4f5;
+  --bd: #e4e4e7;
+  --bd2: #f1f1f3;
+  --tx: #2e2e35;
+  --tx2: #494951;
+  --tx3: #6b6b74;
+  --tx4: #a1a1aa;
+  --tx5: #c6c6cc;
+  --inv: #2b2b31;
+  --invTx: #fff;
+  --invHov: #3f3f47;
+  --ring: rgba(24, 24, 27, 0.07);
+  --dots: #e9e9ec;
+  --edge: #d6d6db;
+  --edgeHi: #aaaab2;
+  --mixTx: #000;
+  --segOn: #fff;
+  --nl-accent: #0e7c66;
+  --nl-vio: oklch(0.55 0.17 285);
+}
+html.nl-dark {
+  --bg: #0c0c0f;
+  --sf: #17171b;
+  --sf2: #1d1d22;
+  --sf3: #26262c;
+  --bd: #2e2e36;
+  --bd2: #232329;
+  --tx: #f4f4f5;
+  --tx2: #c9c9d0;
+  --tx3: #98989f;
+  --tx4: #6b6b74;
+  --tx5: #4a4a52;
+  --inv: #f4f4f5;
+  --invTx: #131316;
+  --invHov: #d8d8dc;
+  --ring: rgba(244, 244, 245, 0.14);
+  --dots: #222228;
+  --edge: #33333b;
+  --edgeHi: #55555e;
+  --mixTx: #fff;
+  --segOn: #3e3e46;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+}
+body {
+  font-family: "Mona Sans", ui-sans-serif, system-ui, sans-serif;
+  color: var(--tx);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover,
+a:visited {
+  color: inherit;
+}
+input,
+button,
+textarea {
+  font-family: "Mona Sans", ui-sans-serif, system-ui, sans-serif;
+}
+input {
+  color: var(--tx);
+}
+::placeholder {
+  color: var(--tx4);
+  opacity: 1;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bd);
+  border-radius: 5px;
+  border: 2px solid var(--sf);
+}
+
+.nl-wordmark {
+  font-family: "Fraunces", serif;
+  font-weight: 800;
+  font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+}
+
+@keyframes nl-pop {
+  from {
+    opacity: 0;
+    transform: translateY(7px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes nl-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes nl-nudge {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-6px, -6px);
+  }
+}
+@keyframes nl-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+@keyframes nl-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* Inline spinner for buttons waiting on an AI call. Inherits the button's
+   text color: the arc is currentColor, the track a 30% mix of it. */
+.nl-spin {
+  display: inline-block;
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, currentColor 30%, transparent);
+  border-top-color: currentColor;
+  animation: nl-spin 0.7s linear infinite;
+  vertical-align: -2px;
+  margin-right: 7px;
+}
+/* upload drop-zone arrow animates only while hovering the zone */
+[data-dz] svg {
+  animation-play-state: paused !important;
+}
+[data-dz]:hover svg {
+  animation-play-state: running !important;
+}
+
+/* Tiptap editor — matches the mock's Home typography */
+.nl-editor .tiptap {
+  outline: none;
+  min-height: 40vh;
+}
+.nl-editor .tiptap h1 {
+  margin: 0 0 22px;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -0.022em;
+  line-height: 1.15;
+  color: var(--tx);
+}
+.nl-editor .tiptap p {
+  margin: 0 0 16px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--tx2);
+}
+.nl-editor .tiptap ul,
+.nl-editor .tiptap ol {
+  margin: 0 0 16px;
+  padding-left: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--tx2);
+}
+.nl-editor .tiptap p.is-editor-empty:first-child::before {
+  color: var(--tx5);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* ===== hover utility classes (mock's style-hover equivalents) ===== */
+.hv-sf2:hover { background: var(--sf2); }
+.hv-sf3:hover { background: var(--sf3); }
+.hv-tx:hover { color: var(--tx) !important; }
+.hv-bd:hover { border-color: var(--bd) !important; background: var(--sf2); }
+.hv-bdD:hover { border-color: var(--bd) !important; }
+.hv-op:hover { opacity: 0.9; }
+.hv-op8:hover { opacity: 0.8; }
+.hv-inv:hover { background: var(--invHov) !important; }
+.hv-dz:hover { border-color: var(--tx) !important; background: var(--sf2); }
+.hv-fade { transition: opacity 0.12s ease; }
+.hv-fade:hover { opacity: 0.15; }
+.hv-lift:hover { box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09) !important; }
+.hv-row:hover { background: var(--sf2); }
+.hv-und:hover { text-decoration: underline; }
