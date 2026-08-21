@@ -55,7 +55,7 @@ Fill `.env.local` with:
 | `NEXT_PUBLIC_SUPABASE_URL` | Project URL from Supabase settings |
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Publishable API key |
 | `SUPABASE_SECRET_KEY` | Secret API key (server only) |
-| `PGPW` | Database password (used only by the migration script) |
+| `SUPABASE_DB_PASSWORD` | Database password, used only by the migration script; never needed on the hosting platform |
 | `OPENAI_API_KEY` | App-paid OpenAI key |
 | `AI_MODEL` | Optional model override, defaults to `gpt-5-mini` |
 | `ENCRYPTION_KEY` | 32-byte key for encrypting stored BYOK keys |
