@@ -14,6 +14,9 @@ import { chunkText } from "@/lib/chunk";
 import { enforceRate, RateLimitError } from "@/lib/rate";
 import { QuotaError } from "@/lib/ai/meter";
 
+// YouTube transcript fetch + embedding, or book identification, run inline here.
+export const maxDuration = 300;
+
 export async function POST(request: Request) {
   const supabase = await supabaseServer();
   const {

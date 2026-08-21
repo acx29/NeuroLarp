@@ -9,6 +9,9 @@ import { transcriptionSchema } from "@/lib/ai/schemas";
 import { enforceRate, RateLimitError } from "@/lib/rate";
 import { QuotaError } from "@/lib/ai/meter";
 
+// Vision transcription of up to 10 images; raise the serverless timeout.
+export const maxDuration = 120;
+
 // Ephemeral photo pipeline (PLAN decision 15): bytes stay in memory, go to the
 // vision model, and are discarded. Nothing reaches storage. Client already
 // downscaled via canvas (which also stripped EXIF); limits per decision 16.

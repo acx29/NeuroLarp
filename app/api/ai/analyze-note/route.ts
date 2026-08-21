@@ -9,6 +9,9 @@ import { analyzeNoteSchema } from "@/lib/ai/schemas";
 import { enforceRate, RateLimitError } from "@/lib/rate";
 import { QuotaError } from "@/lib/ai/meter";
 
+// Note analysis is a single AI call; raise the serverless timeout past defaults.
+export const maxDuration = 120;
+
 // Debounced on-save + manual Analyze trigger (PLAN decision 4). One LLM call:
 // note text + full topic/edge inventory in, whitelist-validated suggestions out,
 // deduped, written to the one reversible suggestions inbox (decision 8).

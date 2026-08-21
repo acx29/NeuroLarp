@@ -12,6 +12,9 @@ import { chunkText } from "@/lib/chunk";
 import { enforceRate, RateLimitError } from "@/lib/rate";
 import { QuotaError } from "@/lib/ai/meter";
 
+// PDF text extraction + chunk embedding for large files needs a long timeout.
+export const maxDuration = 300;
+
 export async function POST(request: Request) {
   const supabase = await supabaseServer();
   const {

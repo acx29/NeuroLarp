@@ -12,6 +12,10 @@ import { enforceRate, RateLimitError } from "@/lib/rate";
 import { QuotaError } from "@/lib/ai/meter";
 import { collectSubgraph, topoSort, type GraphEdge } from "@/lib/graph";
 
+// Plan generation is the longest AI call (observed ~90s); allow up to 5 minutes
+// on the hosting platform's serverless runtime.
+export const maxDuration = 300;
+
 export async function POST(request: Request) {
   const supabase = await supabaseServer();
   const {

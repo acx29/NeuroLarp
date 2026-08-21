@@ -11,6 +11,9 @@ import { enforceRate, RateLimitError } from "@/lib/rate";
 import { QuotaError } from "@/lib/ai/meter";
 import { applyReview } from "@/lib/srs";
 
+// Grading batches an AI call for short answers; raise the serverless timeout.
+export const maxDuration = 120;
+
 const norm = (s: string) => s.trim().toLowerCase().replace(/\s+/g, " ").replace(/[.,;:!?]+$/, "");
 
 export async function POST(request: Request, ctx: { params: Promise<{ id: string }> }) {

@@ -10,6 +10,9 @@ import { quizGenerationSchema } from "@/lib/ai/schemas";
 import { enforceRate, RateLimitError } from "@/lib/rate";
 import { QuotaError } from "@/lib/ai/meter";
 
+// Question-set generation can run tens of seconds; raise the serverless timeout.
+export const maxDuration = 300;
+
 export async function POST(request: Request) {
   const supabase = await supabaseServer();
   const {
